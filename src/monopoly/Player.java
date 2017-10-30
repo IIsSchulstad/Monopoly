@@ -16,7 +16,7 @@ public class Player {
 
     private String name;
     private FieldInterface field;
-    private List<OwnebleField> ownsList;
+    private List<OwnableField> ownsList;
     private int money;
 
     public Player(String name, FieldInterface startField) {
@@ -50,7 +50,21 @@ public class Player {
         return money;
     }
 
-    public void buy(OwnebleField owneble) {
+    public List<OwnableField> getFields() {
+        return ownsList;
+    }
+
+    public int getShipFieldCount() {
+        int count = 0;
+        for (OwnableField of : ownsList) {
+            if (of instanceof ShipField) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public void buy(OwnableField owneble) {
         if (pay(owneble.getPrice())) {
             owneble.setOwner(this);
             ownsList.add(owneble);

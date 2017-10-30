@@ -9,7 +9,7 @@ package monopoly;
  *
  * @author rasmusstamm
  */
-public class ShipField extends OwnebleField {
+public class ShipField extends OwnableField {
 
     public ShipField(String name, int number, int price) {
         super(name, number, price);
@@ -17,9 +17,19 @@ public class ShipField extends OwnebleField {
 
     @Override
     public String toString() {
-        String s = "Street Field:\n";
+        String s = "Ship Field:\n";
         s += super.toString();
         return s;
+    }
+
+    @Override
+    public void consequense(Player poorPlayer) {
+        super.consequense(poorPlayer); //To change body of generated methods, choose Tools | Templates.
+        int dept = 500;
+        for (int i = 1; i < this.getOwner().getShipFieldCount(); i++) {
+            dept = dept * 2;
+        }
+        poorPlayer.pay(dept);
     }
 
 }

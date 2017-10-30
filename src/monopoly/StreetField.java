@@ -9,7 +9,7 @@ package monopoly;
  *
  * @author rasmusstamm
  */
-public class StreetField extends OwnebleField {
+public class StreetField extends OwnableField {
 
     public StreetField(String name, int number, int price) {
         super(name, number, price);
@@ -20,6 +20,12 @@ public class StreetField extends OwnebleField {
         String s = "Street Field:\n";
         s += super.toString();
         return s; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void consequense(Player poorPlayer) {
+        super.consequense(poorPlayer); //To change body of generated methods, choose Tools | Templates.
+        poorPlayer.pay(this.getPrice()/10);
     }
 
 }

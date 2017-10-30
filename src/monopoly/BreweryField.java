@@ -9,10 +9,18 @@ package monopoly;
  *
  * @author rasmusstamm
  */
-public class BreweryField extends OwnebleField{
+public class BreweryField extends OwnableField{
     
     public BreweryField(String name, int number, int price) {
         super(name, number, price);
     }
+
+    @Override
+    public String toString() {
+        String s = "Brewery Field:\n";
+        s += super.toString();
+        return s; //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }

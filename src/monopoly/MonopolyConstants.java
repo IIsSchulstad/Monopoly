@@ -7,7 +7,7 @@ package monopoly;
 public interface MonopolyConstants
 {
     // Alle disse konstanter er underforstået 'public static final'
-    int START_MONEY = 1500;
+    int START_MONEY = 30000;
     int JAIL_POS = 11;
     int PASSING_START = 200;
     int INDKOMSTSKAT = 200;
