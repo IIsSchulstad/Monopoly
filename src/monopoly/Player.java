@@ -5,6 +5,9 @@
  */
 package monopoly;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author sjoeh
@@ -12,26 +15,54 @@ package monopoly;
 public class Player {
 
     private String name;
-    private Field currentField;
-    private int pos;
+    private FieldInterface field;
+    private List<OwnebleField> ownsList;
+    private int money;
 
-    public Player(String name, Field startField) {
+    public Player(String name, FieldInterface startField) {
         this.name = name;
-        pos = 0;
-        currentField = startField;
+        field = startField;
+        ownsList = new ArrayList<>();
+        money = MonopolyConstants.START_MONEY;
     }
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
 
-    public void move(Dice die) {
-        pos += die.throwDice();
-        currentField = Game.fields.get(pos);
-        System.out.println(currentField.toString());
+    public void move(Dice dice) {
+        int steps = dice.throwDice();
+        System.out.println(name + " rolled " + steps);
+        this.field = Game.fields[field.getNumber() + steps - 1];
+        System.out.println(field.getName());
+        field.consequense(this);
     }
 
-    public Field getField() {
-        return currentField;
+    public void setPos(int pos) {
+        field = Game.fields[pos];
+    }
+
+    public FieldInterface getField() {
+        return field;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void buy(OwnebleField owneble) {
+        if (pay(owneble.getPrice())) {
+            owneble.setOwner(this);
+            ownsList.add(owneble);
+            System.out.println("You bought " + owneble.getName());
+        }
+    }
+
+    public boolean pay(int amount) {
+        if (money >= amount) {
+            money -= amount;
+            return true;
+        }
+        return false;
     }
 }
